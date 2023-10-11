@@ -1,14 +1,13 @@
-import { Fragment } from 'react'
 import { Disclosure, Menu } from '@headlessui/react'
-import { Bell } from 'heroicons-react'
 
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Albums', href: '/albums' },
   { name: 'Posts', href: '/posts' },
+  { name: 'Logout', href: '/api/logout' },
 ]
 
-export default function Header() {
+export default function Header(props) {
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -43,22 +42,11 @@ export default function Header() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  type="button"
-                  className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <Bell />
-                </button>
 
                 <Menu as="div" className="ml-3 relative">
-                  <div>
-                    <img
-                      className="h-8 w-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
-                    />
-                  </div>
+                  <p className='text-indigo-200'>
+                    {props.username}
+                  </p>
                 </Menu>
               </div>
             </div>

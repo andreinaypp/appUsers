@@ -1,4 +1,11 @@
+import { getCookie } from 'cookies-next';
+import { useRouter } from 'next/router'
+import { hasUsername } from '../utils/helpers';
+
 export default function Login() {
+  const router = useRouter()
+  const { msg } = router.query
+
   return (
     <>
       <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -11,7 +18,9 @@ export default function Login() {
             />
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
+          {msg && <h3 className="text-red-400">{msg}</h3>}
+
+          <form className="mt-8 space-y-6" action="/api/login" method="POST">
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
@@ -78,3 +87,16 @@ export default function Login() {
     </>
   )
 }
+
+export async function getServerSideProps(context) {
+  const {username} = hasUsername(context)
+  if (username !== '') {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/"
+      }
+    }
+  }
+  return { props: { username: false } };
+};

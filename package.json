@@ -8,6 +8,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.17",
     "@heroicons/react": "^1.0.6",
+    "cookies": "^0.8.0",
+    "cookies-next": "^4.0.0",
     "heroicons-react": "^1.4.1",
     "next": "latest",
     "postcss-import": "^15.1.0",
